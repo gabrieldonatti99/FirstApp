@@ -4,33 +4,43 @@ import { View, Text, TextInput, Image, ImageBackground, Button, StyleSheet } fro
 export default function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
     // Aqui você pode adicionar a lógica de autenticação
-    console.log('Username:', username);
-    console.log('Password:', password);
+    // Por enquanto, vamos apenas simular um login bem-sucedido
+    setLoggedIn(true);
   };
 
   return (
     <ImageBackground source={require('./assets/palmeiras2.webp')} style={styles.backgroundImage}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
-       
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={text => setUsername(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={text => setPassword(text)}
-        />
-        <Button title="Login" onPress={handleLogin} />
-      </View>
+      {!loggedIn ? (
+        <View style={styles.container}>
+          {/* <Image source={require('./assets/logo.png')} style={styles.logo} /> */}
+          <Text style={styles.title}>Login</Text>
+         
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={text => setUsername(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={text => setPassword(text)}
+          />
+          <View style={styles.buttonContainer}>
+            <Button title="Login" onPress={handleLogin} />
+          </View>
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.welcomeText}>Bem-vindo usuario. {username}</Text>
+        </View>
+      )}
     </ImageBackground>
   );
 }
@@ -41,15 +51,14 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
     alignItems: 'center',
-width:'100%',
-heigh:'100%',
-    
+    width: '100%',
+    height: '100%',
   },
   container: {
     alignItems: 'center',
   },
   title: {
-    fontSize: 24,
+    fontSize: 45,
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
@@ -66,6 +75,14 @@ heigh:'100%',
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 5,
-    color:'white',
+    color: 'white',
+  },
+  buttonContainer: {
+    width: 300,
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
