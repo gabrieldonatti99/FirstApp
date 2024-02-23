@@ -1,30 +1,71 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Image, ImageBackground, Button, StyleSheet } from 'react-native';
 
 export default function App() {
-return (
-    // começa view
-<View style={styles.container}>
-{/* os 3 textos */}
-<Text style={{fontWeight: 'bold',color: 'blue', fontSize: 30, textAlign: 'right', margin: 0,}}>Gabriel Camargo Donatti.</Text>
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-<Text style={{fontStyle:'italic',color: 'black', fontSize: 25, textAlign: 'left', border: 'solid', borderWidth: 1, borderColor: 'black', margin: 0,}}>14.</Text>
+  const handleLogin = () => {
+    // Aqui você pode adicionar a lógica de autenticação
+    console.log('Username:', username);
+    console.log('Password:', password);
+  };
 
-<Text style={{backgroundColor:'pink' ,color:'black', fontSize: 20, textAlign: 'center', margin: 0,}}>Sala:7</Text>
-
-<Text style={{color: 'black', textAlign: 'center', fontSize: 30, backgroundColor: 'red', border: 'solid', borderWidth: 1, borderColor: 'gold'}}>SENAI SUMARÉ.</Text>
-
-
-</View>
-)};
-
+  return (
+    <ImageBackground source={require('./assets/palmeiras2.webp')} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Login</Text>
+       
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          value={username}
+          onChangeText={text => setUsername(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={text => setPassword(text)}
+        />
+        <Button title="Login" onPress={handleLogin} />
+      </View>
+    </ImageBackground>
+  );
+}
 
 const styles = StyleSheet.create({
-container: {
-
-flex: 1,
-justifyContent: 'center',
-margin: 0,
-display: 'flex',
-},
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+width:'100%',
+heigh:'100%',
+    
+  },
+  container: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'white',
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
+  input: {
+    width: 300,
+    height: 40,
+    backgroundColor: 'black',
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    color:'white',
+  },
 });
